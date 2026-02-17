@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div class="lg:col-span-1 bg-slate-800 p-6 rounded-2xl border border-slate-700 h-fit">
+        <h3 class="text-xl font-bold mb-6 text-emerald-400">Faculty Task Entry</h3>
+        <form method="POST" class="space-y-4">
+            <input type="text" name="emp_id" placeholder="Employee ID" required class="w-full bg-slate-900 border border-slate-600 rounded-lg p-2">
+            <textarea name="task" placeholder="Your Activity..." required class="w-full bg-slate-900 border border-slate-600 rounded-lg p-2"></textarea>
+            <button class="w-full bg-emerald-600 py-2 rounded-lg font-bold">Update My Log</button>
+        </form>
+        <hr class="my-8 border-slate-700">
+        <a href="/export" class="flex items-center justify-center w-full bg-slate-100 text-slate-900 py-3 rounded-lg font-bold hover:bg-white transition">
+            <i class="fas fa-file-excel mr-2"></i> Export Student Logs (.xlsx)
+        </a>
+    </div>
+
+    <div class="lg:col-span-2">
+        <h3 class="text-2xl font-bold mb-6">Student Activity Monitor</h3>
+        <div class="overflow-x-auto bg-slate-800 rounded-2xl border border-slate-700">
+            <table class="w-full text-left">
+                <thead class="bg-slate-700/50 text-slate-400 uppercase text-xs">
+                    <tr>
+                        <th class="p-4">Reg No</th>
+                        <th class="p-4">Name</th>
+                        <th class="p-4">Task</th>
+                        <th class="p-4 text-right">Time</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700">
+                    {% for log in logs %}
+                    <tr class="hover:bg-slate-700/30 transition">
+                        <td class="p-4 font-mono text-blue-400">{{ log.Reg_No }}</td>
+                        <td class="p-4">{{ log.Name }}</td>
+                        <td class="p-4 text-slate-300">{{ log.Task }}</td>
+                        <td class="p-4 text-right text-sm text-slate-500">
+                            {{ log.Date }}<br>{{ log.Time }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
